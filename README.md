@@ -5,6 +5,7 @@ Tripshare is a web application built with **Django** that helps groups of people
 Think: trips with friends, shared apartments, events, etc.  
 You can create groups, add members, define currencies, log expenses, and see **who should pay whom** both per group and globally across all groups.
 
+Accessible online for a limited time via: https://donatello.pythonanywhere.com/
 ---
 
 ## Features
@@ -103,7 +104,7 @@ The main difference is the virtual environment / activation commands.
 ### 1. Clone the repository
 
 ```bash
-git clone git@github.com:speetroo/tripshare.git
+git clone https://github.com/speetroo/tripshare.git
 cd tripshare
 ```
 
