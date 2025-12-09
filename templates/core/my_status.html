@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}My status - Tripshare{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-xl-10 mx-auto">
+            <div class="card-custom">
+                <h2 class="page-title">My status</h2>
+                <p class="text-muted">
+                    Overview of what you paid and what you should receive or pay in each group.
+                </p>
+
+                {% if rows %}
+                    <div class="table-custom mt-3">
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Group</th>
+                                        <th class="text-end">Total paid (€)</th>
+                                        <th class="text-end">Net balance (€)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in rows %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'group_detail' row.group.pk %}">
+                                                    {{ row.group.name }}
+                                                </a>
+                                            </td>
+                                            <td class="text-end">
+                                                {{ row.total_paid_eur|floatformat:2 }}
+                                            </td>
+                                            <td class="text-end">
+                                                {% if row.net_balance_eur > 0 %}
+                                                    <span class="badge badge-balance-positive">
+                                                        {{ row.net_balance_eur|floatformat:2 }} (should receive)
+                                                    </span>
+                                                {% elif row.net_balance_eur < 0 %}
+                                                    <span class="badge badge-balance-negative">
+                                                        {{ row.net_balance_eur|floatformat:2 }} (should pay)
+                                                    </span>
+                                                {% else %}
+                                                    <span class="badge badge-balance-zero">
+                                                        {{ row.net_balance_eur|floatformat:2 }} (settled)
+                                                    </span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">
+                        You are not a member of any group yet. Join or create a group to see your status here.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

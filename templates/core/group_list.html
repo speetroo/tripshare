@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Groups - Tripshare{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-lg-8 mx-auto">
+            <div class="card-custom">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="page-title mb-0">Groups</h2>
+                    <a href="{% url 'create_group' %}" class="btn btn-primary btn-sm">
+                        + Create group
+                    </a>
+                </div>
+
+                {% if groups %}
+                    <div class="list-group">
+                        {% for group in groups %}
+                            <a href="{% url 'group_detail' group.pk %}"
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>
+                                    <strong>{{ group.name }}</strong><br>
+                                    <small class="text-muted">
+                                        {{ group.members.count }} member{{ group.members.count|pluralize }}
+                                    </small>
+                                </span>
+                                <span class="badge bg-secondary rounded-pill">
+                                    {{ group.expenses.count }} expense{{ group.expenses.count|pluralize }}
+                                </span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">No groups yet. Create your first one!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Create Expense - Tripshare{% endblock %}
+
+{% block content %}
+    <h2>Add a new expense{% if group %} for {{ group.name }}{% endif %}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">Save</button>
+    </form>
+
+    <p><a href="{% url 'group_list' %}">Back to groups</a></p>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Tripshare{% endblock %}
+
+{% block content %}
+    <h2>Create a new account</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+{% endblock %}
