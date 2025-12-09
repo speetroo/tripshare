@@ -10,6 +10,12 @@ from .forms import GroupForm, ExpenseForm, CurrencyForm
 
 from collections import defaultdict
 
+def home(request):
+    if request.user.is_authenticated:
+        return redirect("group_list")
+    else:
+        return redirect("login")
+    
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
